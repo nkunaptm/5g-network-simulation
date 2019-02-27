@@ -1,0 +1,43 @@
+# Methodology for simulation
+
+The implementation of the network simulation was done in python. In this network
+simulation there is a network class that will create the network and will manage the
+MVNOs, the MVNO class will manage and create slices within the network. The slice
+class will house the parameters of each slice that is created, A group class creates
+the group of subscribers that are connected to the created slices. A driver class is
+used to control the simulation as well as log results for each simulation. Figure 1 is a
+visual representation of what has just been described, The code used for the
+simulations can be found in the Appendix
+As simulation begins a network is created, specifications for this are shown in the
+page to follow. Inside this network there are several MVNOs created, these MVNOs
+contained slices. To each of these slices a minimum of two groups of subscribers
+were connected. The number of admissible states for each slice is determined, from
+theses state the number of blocking/dropping states for new/handoff calls is
+determined. If multiple groups were connected to each slice then the
+blocking/dropping states were determined for each group, if only one group is
+connected then only that groups blocking/dropping states are determined.
+The equations to follow were used to determine the admissible states and
+blocking/dropping states:
+The current state of the system is represented:  = (𝑚𝐴, 𝑛𝐴, 𝑚𝐵, 𝑚𝐵)
+With 𝑚𝑖 and 𝑛𝑖 are the number of ongoing new calls and ongoing handoff calls in
+group 𝑖 respectively.
+With the Sample Space 𝑆 = { = (𝑚𝐴, 𝑛𝐴, 𝑚𝐵, 𝑚𝐵
+): (𝑚𝐴 + 𝑛𝐴
+) ∗ 𝑏 ≤ 𝐶𝐴 ∧
+(𝑚𝐵 + 𝑛𝐵
+) ∗ 𝑏 ≤ 𝐶𝐵
+For the Group A the subscribers have new blocking states s  S, for which:
+(((1 + 𝑚𝐴 + 𝑛𝐴
+) ∗ 𝑏 > 𝑇𝐴) 𝑜𝑟 ((1 + 𝑚𝐵 + 𝑛𝐵
+) ∗ 𝑏 > 𝑇𝐵))
+For the Group A the subscribers have handoff call dropping states s  S, for which:
+(((1 + 𝑚𝐴 + 𝑛𝐴
+) ∗ 𝑏 > 𝐶𝐴) 𝑜𝑟 ((1 + 𝑚𝐵 + 𝑛𝐵
+) ∗ 𝑏 > 𝐶𝐵))
+For the Group B the subscribers have new blocking states s  S, for which:
+((1 + 𝑚𝐵 + 𝑛𝐵
+) ∗ 𝑏 > 𝑇𝐵)
+For the Group B the subscribers have handoff call dropping states s  S, for which:
+((1 + 𝑚𝐵 + 𝑛𝐵
+) ∗ 𝑏 > 𝐶𝐵)
+With 𝑇𝑖 and 𝐶𝑖 being the threshold and capacity of group 𝑖 respectively
